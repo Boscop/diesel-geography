@@ -1,4 +1,4 @@
-# diesel-geography &emsp; [![Build Status]][travis] [![Latest Version]][crates.io]
+# diesel-geography &emsp; [![Build Status]][travis] [![Latest Version]][crates.io] [[docs]](https://docs.rs/diesel-geography)
 
 [Build Status]: https://api.travis-ci.org/Boscop/diesel-geography.svg?branch=master
 [travis]: https://travis-ci.org/Boscop/diesel-geography

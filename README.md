@@ -1,4 +1,10 @@
-# diesel-geography
+# diesel-geography &emsp; [![Build Status]][travis] [![Latest Version]][crates.io]
+
+[Build Status]: https://api.travis-ci.org/Boscop/diesel-geography.svg?branch=master
+[travis]: https://travis-ci.org/Boscop/diesel-geography
+[Latest Version]: https://img.shields.io/crates/v/diesel-geography.svg
+[crates.io]: https://crates.io/crates/diesel-geography
+
 Diesel support for PostGIS geography types and functions
 
 ### How to use it:

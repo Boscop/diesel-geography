@@ -1,4 +1,4 @@
-//! Diesel support for PostGIS geography types and functions
+//! Diesel support for PostGIS geography types and functions.
 
 #![allow(proc_macro_derive_resolution_fallback)]
 

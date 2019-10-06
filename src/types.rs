@@ -1,3 +1,5 @@
+//! Rust Types.
+
 use std::io::prelude::*;
 use std::convert::From;
 use diesel::deserialize::{self, FromSql};

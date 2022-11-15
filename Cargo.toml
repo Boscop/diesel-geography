@@ -11,6 +11,6 @@ keywords = ["database", "sql", "orm"]
 categories = ["database"]
 
 [dependencies]
-diesel = { version = "1.3", features = ["postgres"] }
-postgis = "0.8"
+diesel = { version = "2.0.0", features = ["postgres"] }
+postgis = "0.9.0"
 serde = { version = "1.0", features = ["derive"], optional = true }

@@ -5,12 +5,13 @@ use std::convert::From;
 use diesel::deserialize::{self, FromSql};
 use diesel::serialize::{self, IsNull, Output, ToSql};
 use diesel::pg::Pg;
+use diesel::backend::RawValue;
 use postgis::ewkb::Point;
 use crate::sql_types::*;
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Copy, Clone, PartialEq, FromSqlRow, AsExpression)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[sql_type = "Geography"]
+#[derive(Debug, Copy, Clone, PartialEq, FromSqlRow, AsExpression, Serialize, Deserialize)]
+#[diesel(sql_type = Geography)]
 pub struct GeogPoint {
 	pub x: f64, // lon
 	pub y: f64, // lat
@@ -31,17 +32,17 @@ impl From<GeogPoint> for Point {
 }
 
 impl FromSql<Geography, Pg> for GeogPoint {
-	fn from_sql(bytes: Option<&[u8]>) -> deserialize::Result<Self> {
+	fn from_sql(bytes: RawValue<Pg>) -> deserialize::Result<Self> {
 		use std::io::Cursor;
 		use postgis::ewkb::EwkbRead;
-		let bytes = not_none!(bytes);
+		let bytes = bytes.as_bytes();
 		let mut rdr = Cursor::new(bytes);
 		Ok(Point::read_ewkb(&mut rdr)?.into())
 	}
 }
 
 impl ToSql<Geography, Pg> for GeogPoint {
-	fn to_sql<W: Write>(&self, out: &mut Output<W, Pg>) -> serialize::Result {
+	fn to_sql<'a>(&'a self, out: &mut Output<'a, '_, Pg>) -> serialize::Result {
 		use postgis::ewkb::{AsEwkbPoint, EwkbWrite};
 		Point::from(*self).as_ewkb().write_ewkb(out)?;
 		Ok(IsNull::No)

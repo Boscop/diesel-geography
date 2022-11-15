@@ -1,5 +1,5 @@
 //! SQL Types.
 
 #[derive(SqlType, QueryId)]
-#[postgres(type_name = "geography")]
+#[diesel(postgres_type(name = "geography"))]
 pub struct Geography;
